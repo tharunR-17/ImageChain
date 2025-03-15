@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ImageChain</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .chain {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+        }
+        .block {
+            border: 1px solid #ccc;
+            padding: 10px;
+            width: 200px;
+            text-align: center;
+        }
+        .block img {
+            max-width: 100%;
+            height: auto;
+        }
+    </style>
+</head>
+<body>
+    <h1>ImageChain</h1>
+    <form action="/upload" method="post" enctype="multipart/form-data">
+        <input type="file" name="file" accept="image/*" required>
+        <button type="submit">Upload Image</button>
+    </form>
+    <h2>ImageChain Blocks</h2>
+    <div class="chain">
+        {% for block in chain %}
+        <div class="block">
+            <p>Block #{{ block.index }}</p>
+            <p>Timestamp: {{ block.timestamp }}</p>
+            <p>Previous Hash: {{ block.previous_hash[:10] }}...</p>
+            <p>Nonce: {{ block.nonce }}</p>
+            <img src="https://ipfs.io/ipfs/{{ block.file_hash }}" alt="Block Image">
+        </div>
+        {% endfor %}
+    </div>
+</body>
+</html>
