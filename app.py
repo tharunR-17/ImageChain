@@ -62,5 +62,9 @@ def get_image(file_id):
                 # If the file is still in use, skip deletion (it will be cleaned up later)
                 pass
 
+@app.route("/about")
+def about():
+    return render_template("about.html")
+
 if __name__ == "__main__":
     app.run(debug=True)
